@@ -1,3 +1,13 @@
+/**
+ * @file publisher.cpp
+ * @author Vedant Ranade
+ * @brief ROS2 publisher node
+ * @version 0.1
+ * @date 2023-11-03
+ *
+ * @copyright Copyright (c) 2023
+ *
+ */
 #include <chrono>
 #include <functional>
 #include <memory>
@@ -5,8 +15,6 @@
 #include <rclcpp/timer.hpp>
 #include <std_msgs/msg/string.hpp>
 #include <string>
-
-using std::placeholders::_1;
 
 class StringPublisher : public rclcpp::Node {
  public:
