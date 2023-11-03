@@ -1,10 +1,18 @@
 # beginner_tutorials
-Beginner tutorials repo for ENPM808X
+Beginner tutorials repo for ENPM808X<br>
+This package was built and tested for ros2-humble on an ubuntu 22.04 distro.<br>
 
-# Build command
+## Install process
 
+1. Clone this repo in a ros2 workspace : ```git clone https://github.com/vedran97/beginner_tutorials.git```
+2. Install dependencies by running ```rosdep install -i --from-path src --rosdistro humble -y``` in the root of your workspace.
+3. Build the package with the following command:
 
-```colcon build --symlink-install --cmake-args -DCMAKE_EXPORT_COMPILE_COMMANDS=ON --parallel-workers $(nproc)```
+# Build commands
+
+1. ```colcon build --symlink-install --cmake-args -DCMAKE_EXPORT_COMPILE_COMMANDS=ON --parallel-workers $(nproc)```
+
+## Instructions to run the cpptools
 
 ```bash
 # run clang-format
