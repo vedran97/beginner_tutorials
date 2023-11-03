@@ -12,6 +12,12 @@ This package was built and tested for ros2-humble on an ubuntu 22.04 distro.<br>
 
 1. ```colcon build --symlink-install --cmake-args -DCMAKE_EXPORT_COMPILE_COMMANDS=ON --parallel-workers $(nproc)```
 
+## Running the code:
+
+1. Once the code is built in a ros2 ws, source the workspace.
+2. to run the publisher: ```ros2 run beginner_tutorials talker```. Topic for publishing: ```Problem_Pub```
+3. to run the subscriber: ```ros2 run beginner_tutorials listener```
+
 ## Instructions to run the cpptools
 
 ```bash
