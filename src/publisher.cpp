@@ -3,8 +3,8 @@
 #include <memory>
 #include <rclcpp/executors.hpp>
 #include <rclcpp/timer.hpp>
-#include <string>
 #include <std_msgs/msg/string.hpp>
+#include <string>
 
 using std::placeholders::_1;
 
