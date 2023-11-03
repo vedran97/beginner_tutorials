@@ -1,3 +1,13 @@
+/**
+ * @file subscriber.cpp
+ * @author Vedant Ranade
+ * @brief ROS2 publisher node
+ * @version 0.1
+ * @date 2023-11-03
+ *
+ * @copyright Copyright (c) 2023
+ */
+
 #include <memory>
 
 #include "rclcpp/rclcpp.hpp"
