@@ -6,6 +6,4 @@
 #include "rclcpp/rclcpp.hpp"
 #include "std_msgs/msg/string.hpp"
 
-int main(){
-    return 0;
-}
+int main() { return 0; }
