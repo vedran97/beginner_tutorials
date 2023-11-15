@@ -47,7 +47,7 @@ class StringPublisher : public rclcpp::Node {
     std::unique_lock<std::mutex> lock(dataMutex_);
     message.data = data;
     lock.unlock();
-    RCLCPP_INFO_STREAM_ONCE(
+    RCLCPP_INFO_STREAM(
         rclcpp::get_logger("rclcpp"),
         "Publishing: " << message.data << " on topic Problem_Pub");
     publisher_->publish(message);
@@ -56,18 +56,18 @@ class StringPublisher : public rclcpp::Node {
       const std::shared_ptr<beginner_tutorials::srv::ModString::Request>
           request,
       std::shared_ptr<beginner_tutorials::srv::ModString::Response> response) {
-    RCLCPP_INFO_STREAM_ONCE(
+    RCLCPP_INFO_STREAM(
         rclcpp::get_logger("rclcpp"),
         "received request with data " << request->publish_this);
     std::unique_lock<std::mutex> lock(dataMutex_);
-    RCLCPP_WARN_STREAM_ONCE(
+    RCLCPP_WARN_STREAM(
         rclcpp::get_logger("rclcpp"),
         "got the mutex,updating data to " << request->publish_this);
     data = request->publish_this;
     lock.unlock();
-    RCLCPP_DEBUG_STREAM_ONCE(rclcpp::get_logger("rclcpp"), "unlocked mutex");
+    RCLCPP_DEBUG_STREAM(rclcpp::get_logger("rclcpp"), "unlocked mutex");
     response->set__success(true);
-    RCLCPP_INFO_STREAM_ONCE(rclcpp::get_logger("rclcpp"),
+    RCLCPP_INFO_STREAM(rclcpp::get_logger("rclcpp"),
                             "finished processing request");
   }
   std::mutex dataMutex_;
