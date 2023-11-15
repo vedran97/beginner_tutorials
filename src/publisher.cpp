@@ -19,7 +19,6 @@
 #include <std_msgs/msg/string.hpp>
 #include <string>
 
-#include "beginner_tutorials/srv/detail/mod_string__struct.hpp"
 #include "beginner_tutorials/srv/mod_string.hpp"
 using std::placeholders::_1;
 using std::placeholders::_2;
@@ -94,6 +93,8 @@ int main(int argc, char* argv[]) {
   rclcpp::init(argc, argv);
   // spin node
   rclcpp::spin(std::make_shared<StringPublisher>());
+  // alert user about shutdown
+  RCLCPP_FATAL_STREAM_ONCE(rclcpp::get_logger("rclpcpp"), "Subscriber closed");
   // shutdown node
   rclcpp::shutdown();
   return 0;
