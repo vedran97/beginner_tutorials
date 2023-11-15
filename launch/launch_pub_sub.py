@@ -9,6 +9,7 @@ def generate_launch_description():
             executable='talker',
             name='talker_node',
             output='screen',
+            parameters=[{'time_period_int_ms': 1200}] #publish after every 1200ms
         ),
 
         # Launch the subscriber node
@@ -16,6 +17,6 @@ def generate_launch_description():
             package='beginner_tutorials',
             executable='listener',
             name='listener_node',
-            output='screen',
+            output='screen'
         ),
     ])
