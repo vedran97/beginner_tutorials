@@ -18,7 +18,7 @@ This package was built and tested for ros2-humble on an ubuntu 22.04 distro.<br>
 1. Once the code is built in a ros2 ws, source the workspace.
 2. to run the publisher: ```ros2 run beginner_tutorials talker```. Topic for publishing: ```Problem_Pub```
 3. to run the subscriber: ```ros2 run beginner_tutorials listener```
-4. using launch file: ```ros2 launch beginner_tutorials launch_pub_sub.py```
+4. using launch file: ```ros2 launch beginner_tutorials launch_pub_sub.py``` => Param="time_period_int_ms" controls after how many ms the string is published. Call to this service: ```Problem_Srv``` can change the string which is published.
 5. if using vscode terminal , before running rqt type this:```unset GTK_PATH```
 
 ## Instructions to run the cpptools
