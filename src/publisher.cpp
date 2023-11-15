@@ -36,7 +36,7 @@ class StringPublisher : public rclcpp::Node {
    * and sets publisher timer to that value
    */
   StringPublisher() : Node("string_publisher") {
-    this->declare_parameter("time_period_int_ms", int(1000));
+    this->declare_parameter("time_period_int_ms", static_cast<int>(1000));
     auto param = this->get_parameter("time_period_int_ms");
     if (param.get_type() == rclcpp::PARAMETER_NOT_SET) {
       RCLCPP_ERROR_STREAM(rclcpp::get_logger("rclcpp"),
@@ -46,7 +46,8 @@ class StringPublisher : public rclcpp::Node {
       RCLCPP_INFO_STREAM(rclcpp::get_logger("rclcpp"),
                          "Time period Parameter set to " << param.as_int());
     }
-    publisher_ = this->create_publisher<std_msgs::msg::String>("Problem_Pub", 10);
+    publisher_ =
+        this->create_publisher<std_msgs::msg::String>("Problem_Pub", 10);
     timer_ = this->create_wall_timer(
         std::chrono::milliseconds(param.as_int()),
         std::bind(&StringPublisher::dataPublisherCallback, this));
