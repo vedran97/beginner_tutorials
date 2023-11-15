@@ -39,11 +39,10 @@ class StringPublisher : public rclcpp::Node {
     this->declare_parameter("time_period_int_ms", static_cast<int>(1000));
     auto param = this->get_parameter("time_period_int_ms");
     if (param.get_type() == rclcpp::PARAMETER_NOT_SET) {
-      RCLCPP_ERROR_STREAM(rclcpp::get_logger("rclcpp"),
-                          "Time period Parameter not set");
+      RCLCPP_ERROR_STREAM(this->get_logger(), "Time period Parameter not set");
       throw std::runtime_error("Time period Parameter not set");
     } else {
-      RCLCPP_INFO_STREAM(rclcpp::get_logger("rclcpp"),
+      RCLCPP_INFO_STREAM(this->get_logger(),
                          "Time period Parameter set to " << param.as_int());
     }
     publisher_ =
@@ -66,9 +65,9 @@ class StringPublisher : public rclcpp::Node {
     std::unique_lock<std::mutex> lock(dataMutex_);
     message.data = data;
     lock.unlock();
-    RCLCPP_INFO_STREAM(
-        rclcpp::get_logger("rclcpp"),
-        "Publishing: " << message.data << " on topic 'Problem_Pub'");
+    RCLCPP_INFO_STREAM(this->get_logger(), "Publishing: "
+                                               << "'" << message.data << "'"
+                                               << " on topic 'Problem_Pub'");
     publisher_->publish(message);
   }
   /**
@@ -81,18 +80,16 @@ class StringPublisher : public rclcpp::Node {
       const std::shared_ptr<beginner_tutorials::srv::ModString::Request>
           request,
       std::shared_ptr<beginner_tutorials::srv::ModString::Response> response) {
-    RCLCPP_INFO_STREAM(rclcpp::get_logger("rclcpp"),
+    RCLCPP_INFO_STREAM(this->get_logger(),
                        "received request with data " << request->publish_this);
     std::unique_lock<std::mutex> lock(dataMutex_);
-    RCLCPP_WARN_STREAM(
-        rclcpp::get_logger("rclcpp"),
-        "got the mutex,updating data to " << request->publish_this);
+    RCLCPP_WARN_STREAM(this->get_logger(), "got the mutex,updating data to "
+                                               << request->publish_this);
     data = request->publish_this;
     lock.unlock();
-    RCLCPP_DEBUG_STREAM(rclcpp::get_logger("rclcpp"), "unlocked mutex");
+    RCLCPP_DEBUG_STREAM(this->get_logger(), "unlocked mutex");
     response->set__success(true);
-    RCLCPP_INFO_STREAM(rclcpp::get_logger("rclcpp"),
-                       "finished processing request");
+    RCLCPP_INFO_STREAM(this->get_logger(), "finished processing request");
   }
   std::mutex dataMutex_;
   std::string data = "Theres a problem houston";
@@ -106,7 +103,7 @@ int main(int argc, char* argv[]) {
   // spin node
   rclcpp::spin(std::make_shared<StringPublisher>());
   // alert user about shutdown
-  RCLCPP_FATAL_STREAM_ONCE(rclcpp::get_logger("rclpcpp"), "Subscriber closed");
+  RCLCPP_FATAL_STREAM_ONCE(rclcpp::get_logger("rclpcpp"), "Publisher closed");
   // shutdown node
   rclcpp::shutdown();
   return 0;
