@@ -1,0 +1,4 @@
+# ModifyString.srv
+string publish_this
+---
+bool success
