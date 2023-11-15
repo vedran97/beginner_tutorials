@@ -17,6 +17,7 @@
 #include <rclcpp/logging.hpp>
 #include <rclcpp/timer.hpp>
 #include <std_msgs/msg/string.hpp>
+#include <stdexcept>
 #include <string>
 
 #include "beginner_tutorials/srv/mod_string.hpp"
@@ -31,13 +32,20 @@ class StringPublisher : public rclcpp::Node {
  public:
   /**
    * @brief Construct a new String Publisher object
-   * @note starts a timer node and a service
+   * @note starts a timer node and a service. Reads a parameter for time_period
+   * and sets publisher timer to that value
    */
   StringPublisher() : Node("string_publisher") {
-    publisher_ =
-        this->create_publisher<std_msgs::msg::String>("Problem_Pub", 10);
+    this->declare_parameter("time_period_int_ms", 1000);
+    auto param = this->get_parameter("time_period_ms");
+    if (param.get_type() == rclcpp::PARAMETER_NOT_SET) {
+      RCLCPP_ERROR_STREAM(rclcpp::get_logger("rclcpp"),
+                          "Time period Parameter not set");
+      throw std::runtime_error("Time period Parameter not set");
+    }
+    this->create_publisher<std_msgs::msg::String>("Problem_Pub", 10);
     timer_ = this->create_wall_timer(
-        std::chrono::milliseconds(1000),
+        std::chrono::milliseconds(param.as_int()),
         std::bind(&StringPublisher::dataPublisherCallback, this));
     service_ = this->create_service<beginner_tutorials::srv::ModString>(
         "Problem_Srv",
