@@ -42,6 +42,9 @@ class StringPublisher : public rclcpp::Node {
       RCLCPP_ERROR_STREAM(rclcpp::get_logger("rclcpp"),
                           "Time period Parameter not set");
       throw std::runtime_error("Time period Parameter not set");
+    } else {
+      RCLCPP_INFO_STREAM(rclcpp::get_logger("rclcpp"),
+                         "Time period Parameter set to " << param.as_int());
     }
     this->create_publisher<std_msgs::msg::String>("Problem_Pub", 10);
     timer_ = this->create_wall_timer(
