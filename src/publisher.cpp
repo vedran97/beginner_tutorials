@@ -37,7 +37,7 @@ class StringPublisher : public rclcpp::Node {
    */
   StringPublisher() : Node("string_publisher") {
     this->declare_parameter("time_period_int_ms", 1000);
-    auto param = this->get_parameter("time_period_ms");
+    auto param = this->get_parameter("time_period_int_ms");
     if (param.get_type() == rclcpp::PARAMETER_NOT_SET) {
       RCLCPP_ERROR_STREAM(rclcpp::get_logger("rclcpp"),
                           "Time period Parameter not set");
