@@ -9,6 +9,8 @@
  */
 
 #include <memory>
+#include <rclcpp/logger.hpp>
+#include <rclcpp/logging.hpp>
 
 #include "rclcpp/rclcpp.hpp"
 #include "std_msgs/msg/string.hpp"
@@ -32,6 +34,7 @@ class MinimalSubscriber : public rclcpp::Node {
 int main(int argc, char* argv[]) {
   rclcpp::init(argc, argv);
   rclcpp::spin(std::make_shared<MinimalSubscriber>());
+  RCLCPP_FATAL_STREAM_ONCE(rclcpp::get_logger("rclpcpp"), "Subscriber closed");
   rclcpp::shutdown();
   return 0;
 }

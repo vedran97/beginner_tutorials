@@ -49,7 +49,7 @@ class StringPublisher : public rclcpp::Node {
     lock.unlock();
     RCLCPP_INFO_STREAM_ONCE(
         rclcpp::get_logger("rclcpp"),
-        "Publishing: " << message.data << "on topic Problem_Pub");
+        "Publishing: " << message.data << " on topic Problem_Pub");
     publisher_->publish(message);
   }
   void serviceCallback(
@@ -60,7 +60,7 @@ class StringPublisher : public rclcpp::Node {
         rclcpp::get_logger("rclcpp"),
         "received request with data " << request->publish_this);
     std::unique_lock<std::mutex> lock(dataMutex_);
-    RCLCPP_DEBUG_STREAM_ONCE(
+    RCLCPP_WARN_STREAM_ONCE(
         rclcpp::get_logger("rclcpp"),
         "got the mutex,updating data to " << request->publish_this);
     data = request->publish_this;
