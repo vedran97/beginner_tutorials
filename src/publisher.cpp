@@ -49,16 +49,15 @@ class StringPublisher : public rclcpp::Node {
     lock.unlock();
     RCLCPP_INFO_STREAM(
         rclcpp::get_logger("rclcpp"),
-        "Publishing: " << message.data << " on topic Problem_Pub");
+        "Publishing: " << message.data << " on topic 'Problem_Pub'");
     publisher_->publish(message);
   }
   void serviceCallback(
       const std::shared_ptr<beginner_tutorials::srv::ModString::Request>
           request,
       std::shared_ptr<beginner_tutorials::srv::ModString::Response> response) {
-    RCLCPP_INFO_STREAM(
-        rclcpp::get_logger("rclcpp"),
-        "received request with data " << request->publish_this);
+    RCLCPP_INFO_STREAM(rclcpp::get_logger("rclcpp"),
+                       "received request with data " << request->publish_this);
     std::unique_lock<std::mutex> lock(dataMutex_);
     RCLCPP_WARN_STREAM(
         rclcpp::get_logger("rclcpp"),
@@ -68,7 +67,7 @@ class StringPublisher : public rclcpp::Node {
     RCLCPP_DEBUG_STREAM(rclcpp::get_logger("rclcpp"), "unlocked mutex");
     response->set__success(true);
     RCLCPP_INFO_STREAM(rclcpp::get_logger("rclcpp"),
-                            "finished processing request");
+                       "finished processing request");
   }
   std::mutex dataMutex_;
   std::string data = "Theres a problem houston";

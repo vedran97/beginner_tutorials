@@ -1,4 +1,5 @@
 # beginner_tutorials
+
 Beginner tutorials repo for ENPM808X<br>
 This package was built and tested for ros2-humble on an ubuntu 22.04 distro.<br>
 
@@ -8,16 +9,17 @@ This package was built and tested for ros2-humble on an ubuntu 22.04 distro.<br>
 2. Install dependencies by running ```rosdep install -i --from-path src --rosdistro humble -y``` in the root of your workspace.
 3. Build the package with the following command:
 
-# Build commands
+## Build commands
 
 1. ```colcon build --symlink-install --cmake-args -DCMAKE_EXPORT_COMPILE_COMMANDS=ON --parallel-workers $(nproc)```
 
-## Running the code:
+## Running the code
 
 1. Once the code is built in a ros2 ws, source the workspace.
 2. to run the publisher: ```ros2 run beginner_tutorials talker```. Topic for publishing: ```Problem_Pub```
 3. to run the subscriber: ```ros2 run beginner_tutorials listener```
 4. using launch file: ```ros2 launch beginner_tutorials launch_pub_sub.py```
+5. if using vscode terminal , before running rqt type this:```unset GTK_PATH```
 
 ## Instructions to run the cpptools
 
