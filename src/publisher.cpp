@@ -15,6 +15,8 @@
 #include <rclcpp/timer.hpp>
 #include <std_msgs/msg/string.hpp>
 #include <string>
+#include "beginner_tutorials/srv/detail/mod_string__struct.hpp"
+#include "beginner_tutorials/srv/mod_string.hpp"
 
 class StringPublisher : public rclcpp::Node {
  public:
@@ -23,17 +25,20 @@ class StringPublisher : public rclcpp::Node {
         this->create_publisher<std_msgs::msg::String>("Problem_Pub", 10);
     timer_ =
         this->create_wall_timer(std::chrono::milliseconds(1000),
-                                std::bind(&StringPublisher::callback, this));
+                                std::bind(&StringPublisher::dataPublisherCallback, this));
+
   }
 
  private:
-  void callback() {
+  void dataPublisherCallback() {
     auto message = std_msgs::msg::String();
-    message.data = "Theres a problem houston";
+    message.data = data;
     publisher_->publish(message);
   }
+  std::string data = "Theres a problem houston";
   rclcpp::TimerBase::SharedPtr timer_;
   rclcpp::Publisher<std_msgs::msg::String>::SharedPtr publisher_;
+  rclcpp::Service<beginner_tutorials::srv::ModString>::SharedPtr service_;
 };
 int main(int argc, char* argv[]) {
   rclcpp::init(argc, argv);
