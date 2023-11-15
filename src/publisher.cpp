@@ -30,6 +30,10 @@ using std::placeholders::_2;
  */
 class StringPublisher : public rclcpp::Node {
  public:
+  /**
+   * @brief Construct a new String Publisher object
+   * @note starts a timer node and a service
+   */
   StringPublisher() : Node("string_publisher") {
     publisher_ =
         this->create_publisher<std_msgs::msg::String>("Problem_Pub", 10);
@@ -42,6 +46,10 @@ class StringPublisher : public rclcpp::Node {
   }
 
  private:
+  /**
+   * @brief Publishes the string to the topic at a rate decided in the
+   * constructor
+   */
   void dataPublisherCallback() {
     auto message = std_msgs::msg::String();
     std::unique_lock<std::mutex> lock(dataMutex_);
@@ -52,6 +60,12 @@ class StringPublisher : public rclcpp::Node {
         "Publishing: " << message.data << " on topic 'Problem_Pub'");
     publisher_->publish(message);
   }
+  /**
+   * @brief Callback function for handling the service
+   *
+   * @param request contains the string to be published
+   * @param response return success before exiting
+   */
   void serviceCallback(
       const std::shared_ptr<beginner_tutorials::srv::ModString::Request>
           request,
@@ -76,8 +90,11 @@ class StringPublisher : public rclcpp::Node {
   rclcpp::Service<beginner_tutorials::srv::ModString>::SharedPtr service_;
 };
 int main(int argc, char* argv[]) {
+  // initialize the ros2 context
   rclcpp::init(argc, argv);
+  // spin node
   rclcpp::spin(std::make_shared<StringPublisher>());
+  // shutdown node
   rclcpp::shutdown();
   return 0;
 }
