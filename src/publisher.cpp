@@ -45,10 +45,24 @@ class StringPublisher : public rclcpp::Node {
       RCLCPP_INFO_STREAM(this->get_logger(),
                          "Time period Parameter set to " << param.as_int());
     }
+    int delayTime=0;
+    auto displayErrorSetTimeDelay = [&](){
+    RCLCPP_ERROR_STREAM(this->get_logger(), "Time period Parameter Too LOW, using spin rate as 1000ms");
+    delayTime=1000;
+    };
+    if(param.as_int()<0){
+      RCLCPP_ERROR_STREAM(this->get_logger(), "Time period Parameter IS NEGATIVE");
+      displayErrorSetTimeDelay();
+    }
+    else if(param.as_int()<1000){
+      displayErrorSetTimeDelay();
+    }else{
+      delayTime=param.as_int();
+    }
     publisher_ =
         this->create_publisher<std_msgs::msg::String>("Problem_Pub", 10);
     timer_ = this->create_wall_timer(
-        std::chrono::milliseconds(param.as_int()),
+        std::chrono::milliseconds(delayTime),
         std::bind(&StringPublisher::dataPublisherCallback, this));
     service_ = this->create_service<beginner_tutorials::srv::ModString>(
         "Problem_Srv",
