@@ -9,7 +9,7 @@ def generate_launch_description():
             executable='talker',
             name='talker_node',
             output='screen',
-            parameters=[{'time_period_int_ms': 1200}], #publish after every 1200ms,
+            parameters=[{'time_period_int_ms': 5000}], #publish after every 1200ms,
             arguments=['--ros-args', '--log-level', 'DEBUG']
         ),
 
