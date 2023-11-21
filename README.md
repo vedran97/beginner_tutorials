@@ -26,7 +26,7 @@ This package was built and tested for ros2-humble on an ubuntu 22.04 distro.<br>
 ```bash
 # run clang-format
 
-  clang-format -i --style=Google $(find . -name *.cpp -o -name *.hpp | grep -vE -e "^(./build/|./install/|./log/)")
+  cd src/beginner_tutorials && clang-format -i --style=Google $(find . -name *.cpp -o -name *.hpp | grep -vE -e "^(./build/|./install/|./log/)") && cd -
 
 # run cppcheck
 
