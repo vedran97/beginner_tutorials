@@ -8,23 +8,23 @@
  * @copyright Copyright (c) 2023
  *
  */
+#include <tf2/LinearMath/Quaternion.h>
+#include <tf2_ros/transform_broadcaster.h>
+
+#include <beginner_tutorials/srv/mod_string.hpp>
 #include <chrono>
 #include <functional>
+#include <geometry_msgs/msg/transform_stamped.hpp>
 #include <memory>
 #include <mutex>
 #include <rclcpp/executors.hpp>
 #include <rclcpp/logger.hpp>
 #include <rclcpp/logging.hpp>
+#include <rclcpp/rclcpp.hpp>
 #include <rclcpp/timer.hpp>
 #include <std_msgs/msg/string.hpp>
 #include <stdexcept>
 #include <string>
-
-#include <beginner_tutorials/srv/mod_string.hpp>
-#include <geometry_msgs/msg/transform_stamped.hpp>
-#include <rclcpp/rclcpp.hpp>
-#include <tf2/LinearMath/Quaternion.h>
-#include <tf2_ros/transform_broadcaster.h>
 using std::placeholders::_1;
 using std::placeholders::_2;
 
@@ -70,14 +70,32 @@ class StringPublisher : public rclcpp::Node {
     timer_ = this->create_wall_timer(
         std::chrono::milliseconds(delayTime),
         std::bind(&StringPublisher::dataPublisherCallback, this));
+    tfTimer_ = this->create_wall_timer(
+        std::chrono::milliseconds(1000),
+        std::bind(&StringPublisher::tf2PublisherTimerCallback, this));
     service_ = this->create_service<beginner_tutorials::srv::ModString>(
         "Problem_Srv",
         std::bind(&StringPublisher::serviceCallback, this, _1, _2));
-    tf_broadcaster_ =
-      std::make_unique<tf2_ros::TransformBroadcaster>(*this);
+    tf_broadcaster_ = std::make_unique<tf2_ros::TransformBroadcaster>(*this);
   }
 
  private:
+  void tf2PublisherTimerCallback() {
+    geometry_msgs::msg::TransformStamped t;
+    t.header.stamp = this->get_clock()->now();
+    t.header.frame_id = "world";
+    t.child_frame_id = "talk";
+    t.transform.translation.x = 1000;
+    t.transform.translation.y = 1200;
+    t.transform.translation.z = 0;
+    tf2::Quaternion q;
+    q.setRPY(M_PI, 0,0);
+    t.transform.rotation.x = q.x();
+    t.transform.rotation.y = q.y();
+    t.transform.rotation.z = q.z();
+    t.transform.rotation.w = q.w();
+    tf_broadcaster_->sendTransform(t);
+  }
   /**
    * @brief Publishes the string to the topic at a rate decided in the
    * constructor
@@ -116,6 +134,7 @@ class StringPublisher : public rclcpp::Node {
   std::mutex dataMutex_;
   std::string data = "Theres a problem houston";
   rclcpp::TimerBase::SharedPtr timer_;
+  rclcpp::TimerBase::SharedPtr tfTimer_;
   rclcpp::Publisher<std_msgs::msg::String>::SharedPtr publisher_;
   rclcpp::Service<beginner_tutorials::srv::ModString>::SharedPtr service_;
   std::unique_ptr<tf2_ros::TransformBroadcaster> tf_broadcaster_;
