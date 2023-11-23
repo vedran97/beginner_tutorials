@@ -40,3 +40,19 @@ Call to this service: ```/Problem_Srv``` with request type ```string``` can chan
   mkdir results -p && cpplint  --filter=-build/c++11,+build/c++17,-build/namespaces,-build/include_order $( find . -name *.cpp | grep -vE -e "^(./build/|./install/|./log/)" ) &> results/cpplint
 
 ```
+
+## Instructions to run the tests
+
+1. cd to your colcon_ws
+2. source appropriate ros
+3. Run this ```rm -rf build/beginner_tutorials```
+4. Run this next to build ws,source ws,run the test```colcon build --symlink-install --cmake-args -DCMAKE_EXPORT_COMPILE_COMMANDS=ON --parallel-workers $(nproc) --packages-select beginner_tutorials && source install/setup.bash && colcon test --packages-select beginner_tutorials```
+5. Run this to check results: ```cat log/latest_test/beginner_tutorials/stdout_stderr.log```
+
+## Instructions on running rosbag
+
+1. use this to start the talker app and log all topics in a rosbag ```ros2 launch beginner_tutorials launch_ros_bag.py rosbag_record:=true```
+
+## Integration test result
+
+1. Integration test result for this iteration can be seen in ./results/test_stdout_stderr.log
