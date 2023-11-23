@@ -11,7 +11,7 @@
 #include <rclcpp/rclcpp.hpp>
 #include <std_msgs/msg/detail/string__struct.hpp>
 #include <std_msgs/msg/string.hpp>
-
+//@brief Fixture class for the publisher node. starts the node and stops it when test is done
 class PublisherFixture : public testing::Test {
  public:
   PublisherFixture() : node_(std::make_shared<rclcpp::Node>("talker_test")) {}
@@ -43,6 +43,7 @@ class PublisherFixture : public testing::Test {
   }
 
  public:
+  // @brief Name of the topic which node publishes to
   const std::string topicName_ = "Problem_Pub";
 
  protected:
@@ -85,7 +86,7 @@ class PublisherFixture : public testing::Test {
     return retVal == 0;
   }
 };
-
+// @brief Test to check if the node is running and if data is being published
 TEST_F(PublisherFixture, IsDataReceivedRight) {
   std::cout << "TEST BEGINNING!!" << std::endl;
 
