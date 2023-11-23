@@ -67,6 +67,11 @@ find_package(ament_cmake_gtest REQUIRED)
   # a copyright and license is added to all source files
   set(ament_cmake_cpplint_FOUND TRUE)
   ament_lint_auto_find_test_dependencies()
+  set(TESTFILES
+    test/talker_test.cpp)
+  ament_add_gtest(${PROJECT_NAME}_test ${TESTFILES})
+  ament_target_dependencies(${PROJECT_NAME}_test rclcpp
+  std_msgs)
 endif()
 
 ament_package()
