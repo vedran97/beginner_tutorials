@@ -41,18 +41,28 @@ Call to this service: ```/Problem_Srv``` with request type ```string``` can chan
 
 ```
 
+## Checking out frames
+
+0. ```source install/setup.bash``` after building this package
+1. Run the talker node: ```ros2 run beginner_tutorials talker```
+2. Run tf2_echo : ```ros2 run tf2_ros tf2_echo world talk```
+3. Run view_frames: ```ros2 run tf2_tools view_frames```
+
 ## Instructions to run the tests
 
 1. cd to your colcon_ws
 2. source appropriate ros
 3. Run this ```rm -rf build/beginner_tutorials```
-4. Run this next to build ws,source ws,run the test```colcon build --symlink-install --cmake-args -DCMAKE_EXPORT_COMPILE_COMMANDS=ON --parallel-workers $(nproc) --packages-select beginner_tutorials && source install/setup.bash && colcon test --packages-select beginner_tutorials```
+4. Run this next to build package,source package,run the test```colcon build --symlink-install --cmake-args -DCMAKE_EXPORT_COMPILE_COMMANDS=ON --parallel-workers $(nproc) --packages-select beginner_tutorials && source install/setup.bash && colcon test --packages-select beginner_tutorials```
 5. Run this to check results: ```cat log/latest_test/beginner_tutorials/stdout_stderr.log```
 
-## Instructions on running rosbag
+## Instructions on running,inspecting rosbag,playing back rosfile
 
-1. use this to start the talker app and log all topics in a rosbag ```ros2 launch beginner_tutorials launch_ros_bag.py rosbag_record:=true```
+0. ```source install/setup.bash``` after building this package
+1. use this to start the talker node and log all topics in a rosbag ```ros2 launch beginner_tutorials launch_ros_bag.py rosbag_record:=true``` (use rosbag_record:=false to disable recording)
+2. inspect stored rosbag using ```ros2 bag info ./results/rosbag2_2023_11_23-02_11_16/rosbag2_2023_11_23-02_11_16_0.db3``` (cd inside this package ```cd src/beginner_tutorials```) (after ```info```, the path of any generated rosbag can be given)
+3. play back stored rosbag file using ```ros2 bag play ./results/rosbag2_2023_11_23-02_11_16/rosbag2_2023_11_23-02_11_16_0.db3``` (cd inside this package ```cd src/beginner_tutorials```) (after ```play```, the path of any generated rosbag can be given) , run the listener node using ```ros2 run beginner_tutorials listener```
 
-## Integration test result
+## Integration test result Assignment 3
 
 1. Integration test result for this iteration can be seen in ./results/test_stdout_stderr.log
