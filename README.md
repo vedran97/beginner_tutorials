@@ -52,3 +52,7 @@ Call to this service: ```/Problem_Srv``` with request type ```string``` can chan
 ## Instructions on running rosbag
 
 1. use this to start the talker app and log all topics in a rosbag ```ros2 launch beginner_tutorials launch_ros_bag.py rosbag_record:=true```
+
+## Integration test result
+
+1. Integration test result for this iteration can be seen in ./results/test_stdout_stderr.log
