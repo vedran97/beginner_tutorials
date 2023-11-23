@@ -63,8 +63,10 @@ find_package(ament_cmake_gtest REQUIRED)
   # comment the line when a copyright and license is added to all source files
   set(ament_cmake_copyright_FOUND TRUE)
   set(ament_cmake_cpplint_FOUND TRUE)
-  # set(ament_cmake_flake8_FOUND TRUE)
+  set(ament_cmake_flake8_FOUND TRUE)
   set(ament_cmake_uncrustify_FOUND TRUE)
+  set(ament_cmake_lint_cmake_FOUND TRUE)
+  set(ament_cmake_xmllint_FOUND TRUE)
   ament_lint_auto_find_test_dependencies()
   set(TESTFILES
     test/talker_test.cpp)

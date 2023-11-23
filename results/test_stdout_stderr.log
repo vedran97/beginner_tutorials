@@ -1,0 +1,78 @@
+UpdateCTestConfiguration  from :/home/vedant/Desktop/ros2_ws/build/beginner_tutorials/CTestConfiguration.ini
+Parse Config file:/home/vedant/Desktop/ros2_ws/build/beginner_tutorials/CTestConfiguration.ini
+   Site: vedant-808x
+   Build name: (empty)
+ Add coverage exclude regular expressions.
+Create new tag: 20231123-0608 - Experimental
+UpdateCTestConfiguration  from :/home/vedant/Desktop/ros2_ws/build/beginner_tutorials/CTestConfiguration.ini
+Parse Config file:/home/vedant/Desktop/ros2_ws/build/beginner_tutorials/CTestConfiguration.ini
+Test project /home/vedant/Desktop/ros2_ws/build/beginner_tutorials
+Constructing a list of tests
+Done constructing a list of tests
+Updating test list for fixtures
+Added 0 tests to meet fixture requirements
+Checking test dependency graph...
+Checking test dependency graph end
+test 1
+    Start 1: beginner_tutorials_test
+
+1: Test command: /usr/bin/python3.10 "-u" "/opt/ros/humble/share/ament_cmake_test/cmake/run_test.py" "/home/vedant/Desktop/ros2_ws/build/beginner_tutorials/test_results/beginner_tutorials/beginner_tutorials_test.gtest.xml" "--package-name" "beginner_tutorials" "--output-file" "/home/vedant/Desktop/ros2_ws/build/beginner_tutorials/ament_cmake_gtest/beginner_tutorials_test.txt" "--command" "/home/vedant/Desktop/ros2_ws/build/beginner_tutorials/beginner_tutorials_test" "--gtest_output=xml:/home/vedant/Desktop/ros2_ws/build/beginner_tutorials/test_results/beginner_tutorials/beginner_tutorials_test.gtest.xml"
+1: Test timeout computed to be: 60
+1: -- run_test.py: invoking following command in '/home/vedant/Desktop/ros2_ws/build/beginner_tutorials':
+1:  - /home/vedant/Desktop/ros2_ws/build/beginner_tutorials/beginner_tutorials_test --gtest_output=xml:/home/vedant/Desktop/ros2_ws/build/beginner_tutorials/test_results/beginner_tutorials/beginner_tutorials_test.gtest.xml
+1: [==========] Running 1 test from 1 test suite.
+1: [----------] Global test environment set-up.
+1: [----------] 1 test from PublisherFixture
+1: [ RUN      ] PublisherFixture.IsDataReceivedRight
+1: [INFO] [1700719720.079173477] [talker_test]: DONE WITH SETUP!!
+1: TEST BEGINNING!!
+1: [INFO] [1700719720.583247618] [talker_test]: I heard: 'Theres a problem houston'
+1: [INFO] [1700719721.583202652] [talker_test]: I heard: 'Theres a problem houston'
+1: [INFO] [1700719722.583133403] [talker_test]: I heard: 'Theres a problem houston'
+1: [INFO] [1700719723.583191772] [talker_test]: I heard: 'Theres a problem houston'
+1: [INFO] [1700719724.583196027] [talker_test]: I heard: 'Theres a problem houston'
+1: DONE WITH TEARDOWN
+1: [       OK ] PublisherFixture.IsDataReceivedRight (7857 ms)
+1: [----------] 1 test from PublisherFixture (7857 ms total)
+1: 
+1: [----------] Global test environment tear-down
+1: [==========] 1 test from 1 test suite ran. (7859 ms total)
+1: [  PASSED  ] 1 test.
+1: DONE SHUTTING DOWN ROS
+1: -- run_test.py: return code 0
+1: -- run_test.py: inject classname prefix into gtest result file '/home/vedant/Desktop/ros2_ws/build/beginner_tutorials/test_results/beginner_tutorials/beginner_tutorials_test.gtest.xml'
+1: -- run_test.py: verify result file '/home/vedant/Desktop/ros2_ws/build/beginner_tutorials/test_results/beginner_tutorials/beginner_tutorials_test.gtest.xml'
+1/3 Test #1: beginner_tutorials_test ..........   Passed    8.22 sec
+test 2
+    Start 2: cppcheck
+
+2: Test command: /usr/bin/python3.10 "-u" "/opt/ros/humble/share/ament_cmake_test/cmake/run_test.py" "/home/vedant/Desktop/ros2_ws/build/beginner_tutorials/test_results/beginner_tutorials/cppcheck.xunit.xml" "--package-name" "beginner_tutorials" "--output-file" "/home/vedant/Desktop/ros2_ws/build/beginner_tutorials/ament_cppcheck/cppcheck.txt" "--command" "/opt/ros/humble/bin/ament_cppcheck" "--xunit-file" "/home/vedant/Desktop/ros2_ws/build/beginner_tutorials/test_results/beginner_tutorials/cppcheck.xunit.xml"
+2: Test timeout computed to be: 300
+2: -- run_test.py: invoking following command in '/home/vedant/Desktop/ros2_ws/src/beginner_tutorials':
+2:  - /opt/ros/humble/bin/ament_cppcheck --xunit-file /home/vedant/Desktop/ros2_ws/build/beginner_tutorials/test_results/beginner_tutorials/cppcheck.xunit.xml
+2: cppcheck 2.7 has known performance issues and therefore will not be used, set the AMENT_CPPCHECK_ALLOW_SLOW_VERSIONS environment variable to override this.
+2: -- run_test.py: return code 0
+2: -- run_test.py: verify result file '/home/vedant/Desktop/ros2_ws/build/beginner_tutorials/test_results/beginner_tutorials/cppcheck.xunit.xml'
+2/3 Test #2: cppcheck .........................   Passed    0.48 sec
+test 3
+    Start 3: pep257
+
+3: Test command: /usr/bin/python3.10 "-u" "/opt/ros/humble/share/ament_cmake_test/cmake/run_test.py" "/home/vedant/Desktop/ros2_ws/build/beginner_tutorials/test_results/beginner_tutorials/pep257.xunit.xml" "--package-name" "beginner_tutorials" "--output-file" "/home/vedant/Desktop/ros2_ws/build/beginner_tutorials/ament_pep257/pep257.txt" "--command" "/opt/ros/humble/bin/ament_pep257" "--xunit-file" "/home/vedant/Desktop/ros2_ws/build/beginner_tutorials/test_results/beginner_tutorials/pep257.xunit.xml"
+3: Test timeout computed to be: 60
+3: -- run_test.py: invoking following command in '/home/vedant/Desktop/ros2_ws/src/beginner_tutorials':
+3:  - /opt/ros/humble/bin/ament_pep257 --xunit-file /home/vedant/Desktop/ros2_ws/build/beginner_tutorials/test_results/beginner_tutorials/pep257.xunit.xml
+3: checking ./launch/launch_pub_sub.py
+3: No problems found
+3: -- run_test.py: return code 0
+3: -- run_test.py: verify result file '/home/vedant/Desktop/ros2_ws/build/beginner_tutorials/test_results/beginner_tutorials/pep257.xunit.xml'
+3/3 Test #3: pep257 ...........................   Passed    0.56 sec
+
+[0;32m100% tests passed[0;0m, 0 tests failed[0;0m out of 3
+
+Label Time Summary:
+cppcheck    =   0.48 sec*proc (1 test)
+gtest       =   8.22 sec*proc (1 test)
+linter      =   1.04 sec*proc (2 tests)
+pep257      =   0.56 sec*proc (1 test)
+
+Total Test time (real) =   9.27 sec
