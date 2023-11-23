@@ -46,5 +46,5 @@ Call to this service: ```/Problem_Srv``` with request type ```string``` can chan
 1. cd to your colcon_ws
 2. source appropriate ros
 3. Run this ```rm -rf build/beginner_tutorials```
-4. Run this next to build ws,source ws,run the test```colcon build --packages-select beginner_tutorials && source install/setup.bash && colcon test --packages-select beginner_tutorials```
+4. Run this next to build ws,source ws,run the test```colcon build --symlink-install --cmake-args -DCMAKE_EXPORT_COMPILE_COMMANDS=ON --parallel-workers $(nproc) --packages-select beginner_tutorials && source install/setup.bash && colcon test --packages-select beginner_tutorials```
 5. Run this to check results: ```cat log/latest_test/beginner_tutorials/stdout_stderr.log```

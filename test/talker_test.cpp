@@ -16,6 +16,7 @@ class PublisherFixture : public testing::Test {
  public:
   PublisherFixture() : node_(std::make_shared<rclcpp::Node>("talker_test")) {}
 
+  // cppcheck-suppress unusedFunction
   void SetUp() override {
     // Setup things that should occur before every test instance should go here
 
@@ -24,12 +25,13 @@ class PublisherFixture : public testing::Test {
      *  example: package name = cpp_pubsub, node name = minimal_publisher,
      * executable = talker
      */
-    bool retVal = StartROSExec("beginner_tutorials", "string_publisher", "talker");
+    bool retVal =
+        StartROSExec("beginner_tutorials", "string_publisher", "talker");
     ASSERT_TRUE(retVal);
 
     RCLCPP_INFO_STREAM(node_->get_logger(), "DONE WITH SETUP!!");
   }
-
+  // cppcheck-suppress unusedFunction
   void TearDown() override {
     // Tear things that should occur after every test instance should go here
 
