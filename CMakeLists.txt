@@ -14,6 +14,11 @@ find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(std_msgs REQUIRED)
 find_package(rosidl_default_generators REQUIRED)
+find_package(geometry_msgs REQUIRED)
+find_package(message_filters REQUIRED)
+find_package(tf2 REQUIRED)
+find_package(tf2_geometry_msgs REQUIRED)
+find_package(tf2_ros REQUIRED)
 # uncomment the following section in order to fill in
 # further dependencies manually.
 # find_package(<dependency> REQUIRED)
@@ -31,7 +36,13 @@ rosidl_get_typesupport_target(cpp_typesupport_target
 ament_export_dependencies(rosidl_default_runtime)
 
 add_executable(talker src/publisher.cpp)
-ament_target_dependencies(talker rclcpp std_msgs)
+ament_target_dependencies(talker
+rclcpp
+std_msgs
+geometry_msgs
+rclcpp
+tf2
+tf2_ros)
 target_link_libraries(talker "${cpp_typesupport_target}")
 add_executable(listener src/subscriber.cpp)
 ament_target_dependencies(listener rclcpp std_msgs)
