@@ -1,8 +1,9 @@
 // @file talker_test.cpp
 // @brief Tests ROS2 publisher node
-// @author Vedant Ranade
+// @Modified by Vedant Ranade
 // @note This fule is derived from
 // https://github.com/TommyChangUMD/minimal-integration-test/blob/main/test/basic_test.cpp
+// @copyright Copyright (c) 2023
 
 #include <gtest/gtest.h>
 #include <stdlib.h>
@@ -23,7 +24,7 @@ class PublisherFixture : public testing::Test {
      *  example: package name = cpp_pubsub, node name = minimal_publisher,
      * executable = talker
      */
-    bool retVal = StartROSExec("beginner_tutorials", "talker_node", "talker");
+    bool retVal = StartROSExec("beginner_tutorials", "string_publisher", "talker");
     ASSERT_TRUE(retVal);
 
     RCLCPP_INFO_STREAM(node_->get_logger(), "DONE WITH SETUP!!");
@@ -53,8 +54,9 @@ class PublisherFixture : public testing::Test {
            << " > /dev/null 2> /dev/null &";
     cmdInfo_ss << "ros2 node info "
                << "/" << node_name << " > /dev/null 2> /dev/null";
-    char execName[16];
-    snprintf(execName, 16, "%s",
+    static const constexpr size_t kExecNameLen = 16;
+    char execName[kExecNameLen];
+    snprintf(execName, kExecNameLen, "%s",
              exec_name);  // pkill uses exec name <= 15 char only
     killCmd_ss << "pkill --signal SIGINT " << execName
                << " > /dev/null 2> /dev/null";
@@ -90,15 +92,13 @@ TEST_F(PublisherFixture, IsDataReceivedRight) {
    */
 
   bool hasData = false;
-  auto subscription_ =
-      node_->create_subscription<std_msgs::msg::String>(
-          topicName_, 10,
-          // Lambda expression begins
-          [&](const std_msgs::msg::String& msg) {
-            RCLCPP_INFO(node_->get_logger(), "I heard: '%s'", msg.data.c_str());
-            hasData = true;
-          }  // end of lambda expression
-      );
+  auto subscription_ = node_->create_subscription<std_msgs::msg::String>(
+      topicName_, 10,
+      // Lambda expression begins
+      [&](const std_msgs::msg::String& msg) {
+        RCLCPP_INFO(node_->get_logger(), "I heard: '%s'", msg.data.c_str());
+        hasData = true;
+      });
 
   /*
    * 3.) check to see if we get data winhin 3 sec
