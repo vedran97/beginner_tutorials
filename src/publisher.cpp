@@ -89,7 +89,7 @@ class StringPublisher : public rclcpp::Node {
     t.transform.translation.y = 1200;
     t.transform.translation.z = 0;
     tf2::Quaternion q;
-    q.setRPY(M_PI, 0,0);
+    q.setRPY(M_PI, 0, 0);
     t.transform.rotation.x = q.x();
     t.transform.rotation.y = q.y();
     t.transform.rotation.z = q.z();
